@@ -33,6 +33,18 @@
     color: inherit;
 }
 
+.colorWhite {
+    color: white;
+}
+
+.colorGreen {
+    color: green;
+}
+
+.colorRed {
+    color: red;
+}
+
 .padding1px {
     padding-top: 1px;
 }
