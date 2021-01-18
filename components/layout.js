@@ -26,48 +26,34 @@ export default function Layout({ children, home }) {
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
             <header className={styles.header}>
-                {home ? (
-                    <>
+                <>
+                    {home ? (
                         <img
                             src="/images/dota2.png"
                             className={`${styles.headerHomeImage}`}
                             alt={name}
                         />
-                        <h1
-                            className={
-                                (utilStyles.heading2Xl, utilStyles.colorWhite)
-                            }
-                        >
-                            {name}
-                        </h1>
-                    </>
-                ) : (
-                    <>
+                    ) : (
                         <Link href="/">
                             <a>
                                 <img
                                     src="/images/dota2.png"
-                                    className={`${styles.headerImage} ${utilStyles.borderCircle}`}
+                                    className={`${styles.headerHomeImage}`}
                                     alt={name}
                                 />
                             </a>
                         </Link>
-                        <h2 className={utilStyles.headingLg}>
-                            <Link href="/">
-                                <a className={utilStyles.colorWhite}>{name}</a>
-                            </Link>
-                        </h2>
-                    </>
-                )}
+                    )}
+                    <h1
+                        className={
+                            (utilStyles.heading2Xl, utilStyles.colorWhite)
+                        }
+                    >
+                        {name}
+                    </h1>
+                </>
             </header>
             <main>{children}</main>
-            {!home && (
-                <div className={styles.backToHome}>
-                    <Link href="/">
-                        <a>← Back to home</a>
-                    </Link>
-                </div>
-            )}
         </div>
     );
 }

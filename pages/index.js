@@ -2,8 +2,9 @@ import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import cn from "classnames";
+import Link from "next/link";
 
-import { fetchProfiles } from "../lib/profiles";
+import { fetchBoiPoints, fetchProfiles } from "../lib/profiles";
 import { fetchHeroes } from "../lib/heroes";
 import { fetchHeroPoints } from "../lib/heroPoints";
 
@@ -11,27 +12,33 @@ export async function getStaticProps() {
     const boisData = await fetchProfiles();
     const heroData = await fetchHeroes();
     const heroPoints = await fetchHeroPoints();
+
+    const boiPointsSumMap = {};
+
+    let i = 0;
+
+    for (i = 0; i < boisData.length; i++) {
+        boiPointsSumMap[boisData[i].profile.account_id] = await fetchBoiPoints(
+            boisData[i].profile.account_id
+        );
+    }
+
     return {
         props: {
             boisData,
             heroData,
             heroPoints,
+            boiPointsSumMap,
         },
     };
 }
 
-function getBoiPointSum(matches, heropoints) {
-    let boiPoints = 0;
-
-    var i;
-    for (i = 0; i < matches.length; i++) {
-        boiPoints += heropoints[matches[i].hero_id];
-    }
-
-    return boiPoints;
-}
-
-export default function Home({ boisData, heroData, heroPoints }) {
+export default function Home({
+    boisData,
+    heroData,
+    heroPoints,
+    boiPointsSumMap,
+}) {
     return (
         <Layout home>
             <Head>
@@ -58,34 +65,33 @@ export default function Home({ boisData, heroData, heroPoints }) {
                                         className="card-body"
                                         style={{ textAlign: "center" }}
                                     >
-                                        <a
-                                            className="card-title boi-title"
+                                        <Link
                                             href={
-                                                "https://www.dotabuff.com/players/" +
-                                                profile.account_id
+                                                "/posts/" + profile.account_id
                                             }
                                         >
-                                            {" "}
-                                            {profile.personaname}
-                                        </a>
+                                            <a className="card-title boi-title">
+                                                {" "}
+                                                {profile.personaname}
+                                            </a>
+                                        </Link>
                                         <h3
                                             className={cn({
                                                 [utilStyles.colorGreen]:
-                                                    getBoiPointSum(
-                                                        recentMatches,
-                                                        heroPoints
-                                                    ) > 0,
+                                                    boiPointsSumMap[
+                                                        profile.account_id
+                                                    ] > 0,
                                                 [utilStyles.colorRed]:
-                                                    getBoiPointSum(
-                                                        recentMatches,
-                                                        heroPoints
-                                                    ) < 0,
+                                                    boiPointsSumMap[
+                                                        profile.account_id
+                                                    ] < 0,
                                             })}
                                         >
-                                            {getBoiPointSum(
-                                                recentMatches,
-                                                heroPoints
-                                            )}
+                                            {
+                                                boiPointsSumMap[
+                                                    profile.account_id
+                                                ]
+                                            }
                                         </h3>
                                         {/*
                                         <ul
