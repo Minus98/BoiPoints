@@ -1,9 +1,9 @@
-import Layout from "../../components/layout";
-import { profileIds, fetchProfile, fetchBoiPoints } from "../../lib/profiles";
+import Layout from "../components/layout";
+import { profileIds, fetchProfile, fetchBoiPoints } from "../lib/profiles";
 import cn from "classnames";
-import utilStyles from "../../styles/utils.module.css";
-import { fetchHeroPoints } from "../../lib/heroPoints";
-import { fetchHeroes } from "../../lib/heroes";
+import utilStyles from "../styles/utils.module.css";
+import { fetchHeroPoints } from "../lib/heroPoints";
+import { fetchHeroes } from "../lib/heroes";
 
 export async function getStaticProps({ params }) {
     const boi = await fetchProfile(params.id);

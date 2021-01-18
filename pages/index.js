@@ -65,11 +65,7 @@ export default function Home({
                                         className="card-body"
                                         style={{ textAlign: "center" }}
                                     >
-                                        <Link
-                                            href={
-                                                "/posts/" + profile.account_id
-                                            }
-                                        >
+                                        <Link href={"/" + profile.account_id}>
                                             <a className="card-title boi-title">
                                                 {" "}
                                                 {profile.personaname}
