@@ -9,6 +9,8 @@ import { fetchProfiles } from "../lib/profiles";
 export async function getStaticProps() {
     const boisData = await fetchProfiles();
 
+    boisData.sort((a, b) => (a.boiPointSum > b.boiPointSum ? -1 : 1));
+
     return {
         revalidate: 900,
         props: {
