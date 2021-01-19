@@ -1,13 +1,14 @@
 import Layout from "../components/layout";
-import { profileIds, fetchProfile, fetchBoiPoints } from "../lib/profiles";
+import { profileIds, fetchProfile } from "../lib/profiles";
 import cn from "classnames";
 import utilStyles from "../styles/utils.module.css";
-import { fetchHeroPoints } from "../lib/heroPoints";
 import { fetchHeroes } from "../lib/heroes";
 
 export async function getStaticProps({ params }) {
     const boi = await fetchProfile(params.id);
     const heroData = await fetchHeroes();
+
+    console.log(boi);
 
     return {
         revalidate: 900,
