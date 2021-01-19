@@ -7,18 +7,12 @@ import { fetchHeroes } from "../lib/heroes";
 
 export async function getStaticProps({ params }) {
     const boi = await fetchProfile(params.id);
-    const boiPoints = await fetchBoiPoints(params.id);
-    const heroPoints = await fetchHeroPoints();
     const heroData = await fetchHeroes();
-
-    console.log(boi);
 
     return {
         revalidate: 900,
         props: {
             boi,
-            boiPoints,
-            heroPoints,
             heroData,
         },
     };
@@ -35,7 +29,7 @@ export async function getStaticPaths() {
     };
 }
 
-export default function Profile({ boi, boiPoints, heroPoints, heroData }) {
+export default function Profile({ boi, heroData }) {
     return (
         <Layout>
             <div className="container">
@@ -55,11 +49,13 @@ export default function Profile({ boi, boiPoints, heroPoints, heroData }) {
                                 </h3>
                                 <h3
                                     className={cn({
-                                        [utilStyles.colorGreen]: boiPoints > 0,
-                                        [utilStyles.colorRed]: boiPoints < 0,
+                                        [utilStyles.colorGreen]:
+                                            boi.boiPointSum > 0,
+                                        [utilStyles.colorRed]:
+                                            boi.boiPointSum < 0,
                                     })}
                                 >
-                                    {boiPoints}
+                                    {boi.boiPointSum}
                                 </h3>
                             </div>
                         </div>
@@ -80,7 +76,6 @@ export default function Profile({ boi, boiPoints, heroPoints, heroData }) {
                                     >
                                         <div className="row">
                                             <div className="col-4">
-                                                {console.log(hero_id)}
                                                 <img
                                                     style={{
                                                         maxWidth: "120px",
@@ -102,21 +97,22 @@ export default function Profile({ boi, boiPoints, heroPoints, heroData }) {
                                                 <h4
                                                     className={cn({
                                                         [utilStyles.colorGreen]:
-                                                            heroPoints[
+                                                            boi.boiPointMap[
                                                                 hero_id
                                                             ] > 0,
                                                         [utilStyles.colorRed]:
-                                                            heroPoints[
+                                                            boi.boiPointMap[
                                                                 hero_id
                                                             ] < 0,
                                                     })}
                                                 >
-                                                    {heroPoints[hero_id] > 0 ? (
+                                                    {boi.boiPointMap[hero_id] >
+                                                    0 ? (
                                                         <>+</>
                                                     ) : (
                                                         <></>
                                                     )}
-                                                    {heroPoints[hero_id]}
+                                                    {boi.boiPointMap[hero_id]}
                                                 </h4>
                                             </div>
                                         </div>
