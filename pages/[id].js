@@ -1,5 +1,5 @@
 import Layout from "../components/layout";
-import { profileIds, fetchProfile } from "../lib/profiles";
+import { profileIds, fetchProfile, isWin } from "../lib/profiles";
 import cn from "classnames";
 import utilStyles from "../styles/utils.module.css";
 import { fetchHeroes } from "../lib/heroes";
@@ -68,7 +68,9 @@ export default function Profile({ boi, heroData }) {
                                     kills,
                                     deaths,
                                     assists,
-                                    boiPoints
+                                    boiPoints,
+                                    radiant_win,
+                                    player_slot,
                                 }) => (
                                     <li
                                         className="list-group-item"
@@ -92,7 +94,28 @@ export default function Profile({ boi, heroData }) {
                                                     {kills}/{deaths}/{assists}
                                                 </h5>
                                             </div>
-                                            <div className="col-4 centerItems"></div>
+                                            <div className="col-4 centerItems">
+                                                {isWin(
+                                                    radiant_win,
+                                                    player_slot
+                                                ) ? (
+                                                    <h5
+                                                        className={
+                                                            utilStyles.colorGreen
+                                                        }
+                                                    >
+                                                        Win
+                                                    </h5>
+                                                ) : (
+                                                    <h5
+                                                        className={
+                                                            utilStyles.colorRed
+                                                        }
+                                                    >
+                                                        Loss
+                                                    </h5>
+                                                )}
+                                            </div>
                                             <div className="col-2 centerItems">
                                                 <h4
                                                     className={cn({
@@ -102,8 +125,7 @@ export default function Profile({ boi, heroData }) {
                                                             boiPoints < 0,
                                                     })}
                                                 >
-                                                    {boiPoints >
-                                                    0 ? (
+                                                    {boiPoints > 0 ? (
                                                         <>+</>
                                                     ) : (
                                                         <></>
