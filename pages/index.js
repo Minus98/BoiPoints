@@ -4,12 +4,10 @@ import utilStyles from "../styles/utils.module.css";
 import cn from "classnames";
 import Link from "next/link";
 
-import { fetchBoiPoints, fetchProfiles } from "../lib/profiles";
+import { fetchProfiles } from "../lib/profiles";
 
 export async function getStaticProps() {
     const boisData = await fetchProfiles();
-
-    console.log(boisData);
 
     return {
         revalidate: 900,
