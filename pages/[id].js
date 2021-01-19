@@ -68,6 +68,7 @@ export default function Profile({ boi, heroData }) {
                                     kills,
                                     deaths,
                                     assists,
+                                    boiPoints
                                 }) => (
                                     <li
                                         className="list-group-item"
@@ -96,22 +97,18 @@ export default function Profile({ boi, heroData }) {
                                                 <h4
                                                     className={cn({
                                                         [utilStyles.colorGreen]:
-                                                            boi.boiPointMap[
-                                                                hero_id
-                                                            ] > 0,
+                                                            boiPoints > 0,
                                                         [utilStyles.colorRed]:
-                                                            boi.boiPointMap[
-                                                                hero_id
-                                                            ] < 0,
+                                                            boiPoints < 0,
                                                     })}
                                                 >
-                                                    {boi.boiPointMap[hero_id] >
+                                                    {boiPoints >
                                                     0 ? (
                                                         <>+</>
                                                     ) : (
                                                         <></>
                                                     )}
-                                                    {boi.boiPointMap[hero_id]}
+                                                    {boiPoints}
                                                 </h4>
                                             </div>
                                         </div>
