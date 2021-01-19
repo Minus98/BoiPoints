@@ -5,7 +5,7 @@ import Link from "next/link";
 import cn from "classnames";
 
 const name = "BoiPoints";
-export const siteTitle = "Next.js Sample Website";
+export const siteTitle = "BoiPoints";
 
 export default function Layout({ children, home }) {
     return (

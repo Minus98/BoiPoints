@@ -24,6 +24,7 @@ export async function getStaticProps() {
     }
 
     return {
+        revalidate: 900,
         props: {
             boisData,
             heroData,
@@ -57,10 +58,14 @@ export default function Home({
                                 key={profile.account_id}
                             >
                                 <div className="card">
-                                    <img
-                                        className="card-img-top"
-                                        src={profile.avatarfull}
-                                    ></img>
+                                    <Link href={"/" + profile.account_id}>
+                                        <a>
+                                            <img
+                                                className="card-img-top"
+                                                src={profile.avatarfull}
+                                            ></img>
+                                        </a>
+                                    </Link>
                                     <div
                                         className="card-body"
                                         style={{ textAlign: "center" }}
