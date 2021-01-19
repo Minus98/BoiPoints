@@ -77,6 +77,7 @@ export default function Profile({ boi, boiPoints, heroPoints, heroData }) {
                                     >
                                         <div className="row">
                                             <div className="col-4">
+                                                {console.log(hero_id)}
                                                 <img
                                                     style={{
                                                         maxWidth: "120px",
