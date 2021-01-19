@@ -10,6 +10,9 @@ export async function getStaticProps({ params }) {
     const boiPoints = await fetchBoiPoints(params.id);
     const heroPoints = await fetchHeroPoints();
     const heroData = await fetchHeroes();
+
+    console.log(boi);
+
     return {
         revalidate: 900,
         props: {
