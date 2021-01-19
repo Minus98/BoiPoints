@@ -140,6 +140,96 @@ export default function Profile({ boi, heroData }) {
                         </ul>
                     </div>
                 </div>
+                <div className="row" style={{ marginTop: "20px" }}>
+                    <div className="col-4">
+                        <h1 className={utilStyles.colorWhite}>Best Boi:</h1>
+                    </div>
+                    <div className="col-4">
+                        <h1 className={utilStyles.colorWhite}>Worst Boi:</h1>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-4">
+                        <div className="card">
+                            <img
+                                className="card-img-top"
+                                src={
+                                    "http://cdn.dota2.com" +
+                                    heroData[boi.highestPointHero.hero_id].img
+                                }
+                            ></img>
+                            <div
+                                className="card-body"
+                                style={{ textAlign: "center" }}
+                            >
+                                <h3 style={{ fontWeight: "bold" }}>
+                                    {
+                                        heroData[boi.highestPointHero.hero_id]
+                                            .localized_name
+                                    }
+                                </h3>
+                                <h3 className={utilStyles.colorGreen}>
+                                    {
+                                        boi.boiPointMap[
+                                            boi.highestPointHero.hero_id
+                                        ]
+                                    }
+                                </h3>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <h4>
+                                            Games: {boi.highestPointHero.games}
+                                        </h4>
+                                    </div>
+                                    <div className="col-6">
+                                        <h4>
+                                            Wins: {boi.highestPointHero.win}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-4">
+                        <div className="card">
+                            <img
+                                className="card-img-top"
+                                src={
+                                    "http://cdn.dota2.com" +
+                                    heroData[boi.lowestPointHero.hero_id].img
+                                }
+                            ></img>
+                            <div
+                                className="card-body"
+                                style={{ textAlign: "center" }}
+                            >
+                                <h3 style={{ fontWeight: "bold" }}>
+                                    {
+                                        heroData[boi.lowestPointHero.hero_id]
+                                            .localized_name
+                                    }
+                                </h3>
+                                <h3 className={utilStyles.colorRed}>
+                                    {
+                                        boi.boiPointMap[
+                                            boi.lowestPointHero.hero_id
+                                        ]
+                                    }
+                                </h3>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <h4>
+                                            Games: {boi.lowestPointHero.games}
+                                        </h4>
+                                    </div>
+                                    <div className="col-6">
+                                        <h4>Wins: {boi.lowestPointHero.win}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </Layout>
     );
