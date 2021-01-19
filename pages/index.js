@@ -9,15 +9,7 @@ import { fetchBoiPoints, fetchProfiles } from "../lib/profiles";
 export async function getStaticProps() {
     const boisData = await fetchProfiles();
 
-    /*const boiPointsSumMap = {};
-
-    let i = 0;
-
-    for (i = 0; i < boisData.length; i++) {
-        boiPointsSumMap[boisData[i].profile.account_id] = await fetchBoiPoints(
-            boisData[i].profile.account_id
-        );
-    }*/
+    console.log(boisData);
 
     return {
         revalidate: 900,
