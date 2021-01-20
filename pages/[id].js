@@ -3,6 +3,9 @@ import { profileIds, fetchProfile, isWin } from "../lib/profiles";
 import cn from "classnames";
 import utilStyles from "../styles/utils.module.css";
 import { fetchHeroes } from "../lib/heroes";
+import HeroFilter from "../components/HeroFilter";
+import { useState, createContext } from "react";
+import { filter } from "underscore";
 
 export async function getStaticProps({ params }) {
     const boi = await fetchProfile(params.id);
@@ -27,6 +30,8 @@ export async function getStaticPaths() {
         fallback: false,
     };
 }
+
+let input = "";
 
 export default function Profile({ boi, heroData }) {
     return (
@@ -147,10 +152,13 @@ export default function Profile({ boi, heroData }) {
                     <div className="col-4">
                         <h1 className={utilStyles.colorWhite}>Worst Boi:</h1>
                     </div>
+                    <div className="col-4">
+                        <h1 className={utilStyles.colorWhite}>All Bois:</h1>
+                    </div>
                 </div>
                 <div className="row">
                     <div className="col-4">
-                        <div className="card">
+                        <div className="card profilePageCards">
                             <img
                                 className="card-img-top"
                                 src={
@@ -191,7 +199,7 @@ export default function Profile({ boi, heroData }) {
                         </div>
                     </div>
                     <div className="col-4">
-                        <div className="card">
+                        <div className="card profilePageCards">
                             <img
                                 className="card-img-top"
                                 src={
@@ -228,6 +236,12 @@ export default function Profile({ boi, heroData }) {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="col-4">
+                        <HeroFilter
+                            boiPointMap={boi.boiPointMap}
+                            heroData={heroData}
+                        ></HeroFilter>
                     </div>
                 </div>
             </div>
