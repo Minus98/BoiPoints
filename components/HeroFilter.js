@@ -53,10 +53,18 @@ export default class HeroFilter extends Component {
     render() {
         return (
             <div className="card profilePageCards">
-                <input
-                    className="form-control"
-                    onChange={this.getFilteredHeroes}
-                ></input>
+                <div className="input-group">
+                    <input
+                        className="form-control"
+                        onChange={this.getFilteredHeroes}
+                    ></input>
+                    <span class="input-group-text" id="basic-addon1">
+                        <img
+                            src="/images/search.png"
+                            style={{ maxWidth: "27px" }}
+                        ></img>
+                    </span>
+                </div>
                 <ul className="list-group recentMatchesList">
                     {this.state.displayedHeroes.map((id) => {
                         return (
@@ -81,7 +89,11 @@ export default class HeroFilter extends Component {
                                     </div>
                                     <div className="col-4 centerItems">
                                         {this.props.boiPointMap[id] === null ? (
-                                            <small>Not Enough Games</small>
+                                            <small
+                                                style={{ textAlign: "center" }}
+                                            >
+                                                Not Enough Games
+                                            </small>
                                         ) : (
                                             <h4
                                                 className={cn({
